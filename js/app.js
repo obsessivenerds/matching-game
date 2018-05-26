@@ -12,11 +12,12 @@ function buildCard(card){
 
 let score = document.querySelector('.score-panel');
 let rating = document.querySelector('.stars');
-let counter = document.querySelector('.moves');
-let newGame = document.querySelector('.restart');
+let restart = document.querySelector('.fa-repeat');
 let unmatchedCards = [];
 let matchedCards = [];
 let moves = 0;
+let minute = document.querySelector('.minute');
+let second = document.querySelector('.second');
 
 /*
  * Display the cards on the page
@@ -24,18 +25,6 @@ let moves = 0;
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
-
-//Create cards with example from http://htmldog.com/guides/javascript/advanced/creatingelements/
-//function createCard(cardClass){
-//    document.createElement('ul');
-//    ul.setAttribute('class', 'deck');
-//    document.ul.appendChild(`<li class="card"><i class='fa ${cardClass}''></i></li>`);
-//};
-
-// populate cards in DOM
-//function populateCards(){
-//    shuffle(cardList.concat(cardList)).forEach(createCard);
-//};
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -52,22 +41,6 @@ function shuffle(array) {
     return array;
 };
 
-//Start game and display shuffled cards
-//function startGame() {
-//    shuffle(cardList);
-//    deck.innerHTML = "";
-//    counter.innerHTML = turns;
-//    for (let i = 0; i < cardList.length; i++) {
-//      cards.setAttribute('class', 'deck');
-//      cards.innerHTML += '<i class = "fa '+ cards[i]+'"></i>';
-//    }
-//    let game = document.getElementsByClassName('card');
-//    start = [...game];
-//};
-
-//window.onload = startGame();
-
-
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
@@ -81,9 +54,11 @@ function shuffle(array) {
 
 function startGame(){
   let deck = document.querySelector('.deck');
+
   let cardHTML = shuffle(cards).map(function(card) {
     return buildCard(card);
   });
+  timer();
   deck.innerHTML = cardHTML.join('');
   moves = 0;
 }
@@ -92,6 +67,7 @@ startGame();
 
 let allCards = document.querySelectorAll('.card');
 let openCards = [];
+let moveCounter = document.querySelector('.moves');
 
 allCards.forEach(function(card) {
   card.addEventListener('click', function(e) {
@@ -114,10 +90,50 @@ allCards.forEach(function(card) {
               card.classList.remove('open', 'show');
             });
             openCards = [];
-          },1000);
+          }, 800);
         }
       }
-      counter +=1;
+      moves +=1;
+      moveCounter.innerText = moves;
     }
   });
 });
+
+//Restart function
+
+
+
+//Use setInterval for timer in init game, clearInterval to stop
+let sec = 0;
+let min = 0;
+
+function timer() {
+  interval = setInterval(function() {
+    sec++;
+    second.innerHTML = sec;
+
+    if (sec <= 9) {
+      second.innerHTML = '0' + sec;
+    }
+    if (sec > 59) {
+      min++;
+      sec = 0;
+      minute.innerHTML = min;
+
+      if (min <= 9) {
+        minute.innerHTML = '0' + min;
+      } else if (min > 9) {
+        minute.innerHTML = min;
+      }
+    }
+  }, 1000);
+}
+
+//resetTimer
+function resetTime() {
+  sec = 0;
+  min = 0;
+  clearInterval(interval);
+  second.innerHTML = '00';
+  minute.innerHTML = '00';
+}
