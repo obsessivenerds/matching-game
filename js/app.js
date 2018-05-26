@@ -12,6 +12,7 @@ function buildCard(card){
 
 let score = document.querySelector('.score-panel');
 let rating = document.querySelector('.stars');
+let stars = document.querySelector('.fa-star');
 let restart = document.querySelector('.fa-repeat');
 let unmatchedCards = [];
 let matchedCards = [];
@@ -58,7 +59,6 @@ function startGame(){
   let cardHTML = shuffle(cards).map(function(card) {
     return buildCard(card);
   });
-  timer();
   deck.innerHTML = cardHTML.join('');
   moves = 0;
 }
@@ -92,9 +92,9 @@ allCards.forEach(function(card) {
             openCards = [];
           }, 800);
         }
+        moveCount();
       }
-      moves +=1;
-      moveCounter.innerText = moves;
+      starRating();
     }
   });
 });
@@ -115,7 +115,7 @@ function timer() {
     if (sec <= 9) {
       second.innerHTML = '0' + sec;
     }
-    if (sec > 59) {
+    if (sec >= 60) {
       min++;
       sec = 0;
       minute.innerHTML = min;
@@ -137,3 +137,23 @@ function resetTime() {
   second.innerHTML = '00';
   minute.innerHTML = '00';
 }
+
+//Star rating changes
+
+function starRating(){
+  if (moves == 9) {
+    rating.removeChild(rating.childNodes[0]);
+  } else if (moves == 15) {
+    rating.removeChild(rating.childNodes[1]);
+  };
+  }
+
+  //Moves moveCounter
+  function moveCount() {
+    moves +=1;
+    moveCounter.innerHTML = moves;
+
+    if (moves === 1) {
+      timer();
+    };
+  }
