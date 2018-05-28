@@ -1,11 +1,11 @@
 /*
  * Create a list that holds all of your cards
  */
-const cards = ["fa-diamond", "fa-diamond", "fa-paper-plane-o", "fa-paper-plane-o", "fa-anchor", "fa-anchor", "fa-bolt", "fa-bolt", "fa-cube", "fa-cube", "fa-leaf", "fa-leaf", "fa-bicycle", "fa-bicycle", "fa-bomb", "fa-bomb"]
+const cards = ["fa-diamond", "fa-diamond", "fa-paper-plane-o", "fa-paper-plane-o", "fa-anchor", "fa-anchor", "fa-bolt", "fa-bolt", "fa-cube", "fa-cube", "fa-leaf", "fa-leaf", "fa-bicycle", "fa-bicycle", "fa-bomb", "fa-bomb"];
 
 function buildCard(card){
   return `<li class="card" data-card='${card}'><i class="fa ${card}"></i></li>`
-}
+};
 
 
 //Other variables
@@ -64,7 +64,7 @@ function startGame(){
   });
   deck.innerHTML = cardHTML.join('');
   moves = 0;
-}
+};
 
 startGame();
 
@@ -92,7 +92,6 @@ allCards.forEach(function(card) {
             matchedCards.push(openCards[0]);
             matchedCards.push(openCards[1]);
 
-
             openCards = [];
         } else {
           setTimeout(function() {
@@ -104,7 +103,7 @@ allCards.forEach(function(card) {
         }
         moveCount();
       }
-      starRating()
+      starRating();
     }
     winGame();
   });
@@ -154,15 +153,6 @@ function timer() {
 let interval
 function stopTimer() {
   clearInterval(interval)
-}
-
-//resetTimer
-function resetTime() {
-  sec = 0;
-  min = 0;
-  clearInterval(interval);
-  second.innerHTML = '00';
-  minute.innerHTML = '00';
 }
 
 //Star rating changes
