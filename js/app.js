@@ -12,7 +12,8 @@ function buildCard(card){
 
 let score = document.querySelector('.score-panel');
 
-let stars = document.querySelector('.fa-star');
+let stars = document.getElementsByClassName('fa-star');
+let starParent = document.querySelector('.stars');
 let restart = document.querySelector('.restart');
 let unmatchedCards = [];
 let matchedCards = [];
@@ -20,6 +21,7 @@ let moves = 0;
 let minute = document.querySelector('.minute');
 let second = document.querySelector('.second');
 let button = document.querySelector('.button-start');
+let timerRunning = false;
 
 /*
  * Display the cards on the page
@@ -156,13 +158,18 @@ function resetTime() {
 }
 
 //Star rating changes
+let starOne = document.querySelector('.star-one');
+let starTwo = document.querySelector('.star-two');
+let starThree = document.querySelector('.star-three');
 
 function starRating(){
   if (moves == 9) {
-    rating.removeChild(rating.childNodes[0]);
+    starOne.remove();
   } else if (moves == 15) {
-    rating.removeChild(rating.childNodes[1]);
-  };
+    starTwo.remove();
+  } else if (moves == 25) {
+    starThree.remove();
+  }
   }
 
   //Moves moveCounter
@@ -177,7 +184,7 @@ function starRating(){
 
   //Define function to win game
 function winGame() {
-  if (matchedCards.length === 2) {
+  if (matchedCards.length === 16) {
     winTime = minute.innerHTML + ':' + second.innerHTML;
 
   //Display Modal
