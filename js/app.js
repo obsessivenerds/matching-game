@@ -11,9 +11,9 @@ function buildCard(card){
 //Other variables
 
 let score = document.querySelector('.score-panel');
-let rating = document.querySelector('.stars');
+
 let stars = document.querySelector('.fa-star');
-let restart = document.querySelector('.fa-repeat');
+let restart = document.querySelector('.restart');
 let unmatchedCards = [];
 let matchedCards = [];
 let moves = 0;
@@ -166,8 +166,22 @@ function starRating(){
 
   //Define function to win game
 function winGame() {
-  if (matchedCards.length === 2)
-  modal.style.display = "block";
+  if (matchedCards.length === 2) {
+    winTime = minute.innerHTML + ':' + second.innerHTML;
+
+  //Display Modal
+  modal.style.display = 'block';
+
+  //Display star rating
+  let rating = document.querySelector('.stars').innerHTML;
+  document.getElementById('rating').innerHTML = rating;
+
+  //Display moves
+  document.getElementById('moveTotal').innerHTML = moves;
+
+  //Display time
+  document.getElementById('totalTime').innerHTML = winTime;
+};
 }
 
 //Modal script based on code from https://www.w3schools.com/howto/howto_css_modals.asp
