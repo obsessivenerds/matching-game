@@ -72,7 +72,7 @@ let allCards = document.querySelectorAll('.card');
 let openCards = [];
 let moveCounter = document.querySelector('.moves');
 
-
+//This section was created by watching Mike Wales' Udacity webinar walkthrough of the project
 
 allCards.forEach(function(card) {
   card.addEventListener('click', function(e) {
@@ -87,6 +87,8 @@ allCards.forEach(function(card) {
             openCards[1].classList.add('match');
             openCards[0].classList.add('open', 'show');
             openCards[1].classList.add('open', 'show');
+            openCards[0].classList.add('shake');
+            openCards[1].classList.add('shake');
             matchedCards.push(openCards[0]);
             matchedCards.push(openCards[1]);
 
@@ -148,6 +150,12 @@ function timer() {
   }, 1000);
 }
 
+//stopTimer
+let interval
+function stopTimer() {
+  clearInterval(interval)
+}
+
 //resetTimer
 function resetTime() {
   sec = 0;
@@ -185,6 +193,7 @@ function starRating(){
   //Define function to win game
 function winGame() {
   if (matchedCards.length === 16) {
+    stopTimer();
     winTime = minute.innerHTML + ':' + second.innerHTML;
 
   //Display Modal
