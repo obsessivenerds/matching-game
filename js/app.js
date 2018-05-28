@@ -69,6 +69,8 @@ let allCards = document.querySelectorAll('.card');
 let openCards = [];
 let moveCounter = document.querySelector('.moves');
 
+
+
 allCards.forEach(function(card) {
   card.addEventListener('click', function(e) {
 
@@ -82,6 +84,9 @@ allCards.forEach(function(card) {
             openCards[1].classList.add('match');
             openCards[0].classList.add('open', 'show');
             openCards[1].classList.add('open', 'show');
+            matchedCards.push(openCards[0]);
+            matchedCards.push(openCards[1]);
+
 
             openCards = [];
         } else {
@@ -94,8 +99,9 @@ allCards.forEach(function(card) {
         }
         moveCount();
       }
-      starRating();
+      starRating()
     }
+    winGame();
   });
 });
 
@@ -157,3 +163,9 @@ function starRating(){
       timer();
     };
   }
+
+  //Define function to win game
+function winGame() {
+  if (matchedCards.length === 16)
+  console.log("You won!");
+}
