@@ -19,6 +19,7 @@ let matchedCards = [];
 let moves = 0;
 let minute = document.querySelector('.minute');
 let second = document.querySelector('.second');
+let button = document.querySelector('.button-start');
 
 /*
  * Display the cards on the page
@@ -105,8 +106,18 @@ allCards.forEach(function(card) {
   });
 });
 
-//Restart function
+//Restart event listener
+restart.addEventListener('click', function(event) {
+  window.location.reload(true);
+});
 
+//Reset Game
+button.addEventListener('click', function(event) {
+  if (event.target == button) {
+      modal.style.display = "none";
+      window.location.reload(true);
+  }
+});
 
 
 //Use setInterval for timer in init game, clearInterval to stop
