@@ -22,6 +22,7 @@ let minute = document.querySelector('.minute');
 let second = document.querySelector('.second');
 let button = document.querySelector('.button-start');
 let timerRunning = false;
+let firstClick = true;
 
 /*
  * Display the cards on the page
@@ -77,6 +78,12 @@ let moveCounter = document.querySelector('.moves');
 allCards.forEach(function(card) {
   card.addEventListener('click', function(e) {
 
+    if (firstClick == true) {
+      timer();
+      firstClick = false;
+    }
+
+
     if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match')) {
       openCards.push(card);
       card.classList.add('open', 'show');
@@ -101,10 +108,12 @@ allCards.forEach(function(card) {
             openCards = [];
           }, 800);
         }
-        moveCount();
+          moveCount();
       }
       starRating();
     }
+
+
     winGame();
   });
 });
@@ -162,22 +171,17 @@ let starThree = document.querySelector('.star-three');
 
 function starRating(){
   if (moves == 9) {
-    starOne.remove();
+    starOne.remove()
   } else if (moves == 15) {
     starTwo.remove();
-  } else if (moves == 25) {
-    starThree.remove();
   }
   }
 
-  //Moves moveCounter
+  //Moves counter
   function moveCount() {
     moves +=1;
     moveCounter.innerHTML = moves;
 
-    if (moves === 1) {
-      timer();
-    };
   }
 
   //Define function to win game
